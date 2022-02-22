@@ -2,24 +2,63 @@
   <h1>Milhões de filmes, séries e pessoas para descobrir. Explore já.</h1>
   <span>FILTRE POR:</span>
   <div class="filtro">
-    <button>Ação</button>
-    <button>Aventura</button>
-    <button>Animação</button>
-    <button>Comedia</button>
-    <button>Crime</button>
-    <button>Documentario</button>
-    <button>Drama</button>
-    <button>Familia</button>
-    <button>Fantasia</button>
-    <button>Historia</button>
-    <button>Terror</button>
-    <button>Musica</button>
-    <button>Misterio</button>
-    <button>Romance</button>
-    <button>Ficção cientifica</button>
-    <button>Cinema Tv</button>
-    <button>Thriller</button>
-    <button>Guerra</button>
-    <button>Faroeste</button>
+    <button (click)="filtros('28')" [ngClass]="{ ativo: inFilter('28') }">
+      Ação
+    </button>
+    <button (click)="filtros('12')" [ngClass]="{ ativo: inFilter('12') }">
+      Aventura
+    </button>
+    <button (click)="filtros('16')" [ngClass]="{ ativo: inFilter('16') }">
+      Animação
+    </button>
+    <button (click)="filtros('35')" [ngClass]="{ ativo: inFilter('35') }">
+      Comedia
+    </button>
+    <button (click)="filtros('80')" [ngClass]="{ ativo: inFilter('80') }">
+      Crime
+    </button>
+    <button (click)="filtros('99')" [ngClass]="{ ativo: inFilter('99') }">
+      Documentario
+    </button>
+    <button (click)="filtros('18')" [ngClass]="{ ativo: inFilter('18') }">
+      Drama
+    </button>
+    <button (click)="filtros('10751')" [ngClass]="{ ativo: inFilter('10751') }">
+      Familia
+    </button>
+    <button (click)="filtros('14')" [ngClass]="{ ativo: inFilter('14') }">
+      Fantasia
+    </button>
+    <button (click)="filtros('36')" [ngClass]="{ ativo: inFilter('36') }">
+      Historia
+    </button>
+    <button (click)="filtros('27')" [ngClass]="{ ativo: inFilter('27') }">
+      Terror
+    </button>
+    <button (click)="filtros('10402')" [ngClass]="{ ativo: inFilter('10402') }">
+      Musica
+    </button>
+    <button (click)="filtros('9648')" [ngClass]="{ ativo: inFilter('9648') }">
+      Misterio
+    </button>
+    <button (click)="filtros('10749')" [ngClass]="{ ativo: inFilter('10749') }">
+      Romance
+    </button>
+    <button (click)="filtros('878')" [ngClass]="{ ativo: inFilter('878') }">
+      Ficção cientifica
+    </button>
+    <button (click)="filtros('10770')" [ngClass]="{ ativo: inFilter('10770') }">
+      Cinema Tv
+    </button>
+    <button (click)="filtros('53')" [ngClass]="{ ativo: inFilter('53') }">
+      Thriller
+    </button>
+    <button (click)="filtros('10752')" [ngClass]="{ ativo: inFilter('10752') }">
+      Guerra
+    </button>
+    <button (click)="filtros('37')" [ngClass]="{ ativo: inFilter('37') }">
+      Faroeste
+    </button>
   </div>
 </div>
+<app-main [filtros]="filter" [filmes$]="filmes$"></app-main>
