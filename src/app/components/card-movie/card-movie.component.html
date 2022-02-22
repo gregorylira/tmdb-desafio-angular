@@ -1,0 +1,8 @@
+<div *ngIf="movie" class="card-movie">
+  <img
+    src="{{ 'https://image.tmdb.org/t/p/w500' + movie.poster_path }}"
+    alt="Logo"
+  />
+  <h2>{{ movie.title }}</h2>
+  <span>{{ movie.release_date }}</span>
+</div>

@@ -1,0 +1,13 @@
+.mainComponent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  gap: 2rem;
+  app-card-movie {
+    margin-top: 2rem;
+  }
+}
