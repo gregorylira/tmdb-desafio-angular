@@ -9,12 +9,14 @@ import { TmdbApiService } from '../service/tmdb-api.service';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
-  @Input() filmes$?: Observable<Result[]>;
+  filmes$?: Observable<Result[]>;
   @Input() filtros: string[] = [];
 
   constructor(public tmdbapiService: TmdbApiService) {
     this.tmdbapiService.getPopulares([...this.filtros]);
-    this.filmes$ = this.tmdbapiService.filmes$;
+    this.tmdbapiService.currentFilmes$.subscribe(
+      (filmes) => (this.filmes$ = filmes)
+    );
   }
 
   ngOnInit(): void {}
@@ -22,6 +24,8 @@ export class MainComponent implements OnInit {
   nextPage(): void {
     this.tmdbapiService.setPaginas(this.tmdbapiService.getPaginas() + 1);
     this.tmdbapiService.getPopulares([]);
-    this.filmes$ = this.tmdbapiService.filmes$;
+    this.tmdbapiService.currentFilmes$.subscribe(
+      (filmes) => (this.filmes$ = filmes)
+    );
   }
 }

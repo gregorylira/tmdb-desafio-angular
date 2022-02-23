@@ -26,7 +26,9 @@ export class DashboardComponent implements OnInit {
       this.filter = [...this.filter, novofiltro];
     }
     this.tmdbapiService.getPopulares(this.filter);
-    this.filmes$ = this.tmdbapiService.filmes$;
+    this.tmdbapiService.currentFilmes$.subscribe(
+      (filmes) => (this.filmes$ = filmes)
+    );
   }
 
   inFilter(filtro: string) {

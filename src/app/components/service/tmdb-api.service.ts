@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { Result, RootObject } from 'src/app/model/Filmes';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable, of, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TmdbApiService {
+  private filmesSource = new BehaviorSubject<Observable<Result[]>>(
+    {} as Observable<Result[]>
+  );
+  currentFilmes$ = this.filmesSource.asObservable();
   filmes$?: Observable<Result[]>;
   root$?: Observable<RootObject>;
   private readonly base_URL = 'https://api.themoviedb.org/3/';
@@ -30,7 +34,7 @@ export class TmdbApiService {
       );
     }
     this.filmes$ = this.root$.pipe(map((root) => root.results));
-    this.filmes$.subscribe((filmes) => console.log(filmes));
+    this.filmesSource.next(this.filmes$);
   }
 
   getPaginas(): number {
