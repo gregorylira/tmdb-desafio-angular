@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Result } from 'src/app/model/Filmes';
-import { TmdbApiService } from '../service/tmdb-api.service';
+import { TmdbApiService } from '../../../service/tmdb-api.service';
 
 @Component({
   selector: 'app-dashboard',

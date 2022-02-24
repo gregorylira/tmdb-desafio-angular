@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CardMovieProps, Result } from 'src/app/model/Filmes';
-import { TmdbApiService } from '../service/tmdb-api.service';
+import { TmdbApiService } from '../../../service/tmdb-api.service';
 
 @Component({
   selector: 'app-main',
