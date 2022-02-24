@@ -1,30 +1,22 @@
-<div class="detalhes">
+<div class="detalhes" *ngIf="detail$">
   <aside>
     <img
       class="logoimagem"
-      src="../../../../assets/deadpool.jpg"
+      src="{{ 'https://image.tmdb.org/t/p/w500/' + detail$.poster_path }}"
       alt="logoFilme"
     />
     <div class="detalhesTotal">
-      <h2>Deadpool (2016)</h2>
+      <h2>{{ detail$.original_title }}</h2>
       <span
-        >16 anos • 11/02/2016 (BR) • Ação, Aventura, Comédia, Ficção científica
-        • 1h 47m</span
+        >16 anos • {{ detail$.release_date }} (BR) • {{ getGenres() }} •
+        {{ detail$.runtime }} minutos</span
       >
       <div class="avaliacao">
         <img src="../../../../assets/avaliacao.svg" alt="avaliacao" />
         <span>Avaliação dos usuários</span>
       </div>
       <h3>Sinopse</h3>
-      <span
-        >Baseado no anti-herói não convencional da Marvel Comics, Deadpool conta
-        a história da origem do ex-agente das Forças Especiais que se tornou o
-        mercenário Wade Wilson. Depois de ser submetido a um desonesto
-        experimento que o deixa com poderes de cura acelerada, Wade adota o
-        alter ego de Deadpool. Armado com suas novas habilidades e um senso de
-        humor negro e distorcido, Deadpool persegue o homem que quase destruiu
-        sua vida.
-      </span>
+      <span>{{ detail$.overview }} </span>
       <div class="participantes">
         <div>
           <h4>Rob Liedeld</h4>

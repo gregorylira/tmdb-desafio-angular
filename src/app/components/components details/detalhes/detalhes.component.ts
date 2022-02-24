@@ -13,12 +13,13 @@ import { RootDetail } from 'src/app/model/Details';
 })
 export class DetalhesComponent implements OnInit {
   participantes$?: Observable<Cast[]>;
-  details$?: Observable<RootDetail>;
+  detail$?: RootDetail;
   @Input() id: string = '1';
 
   constructor(public tmdApiService: TmdbApiService) {}
 
   ngOnInit(): void {
+    this.getDetalhes();
     this.getParticipantes();
   }
 
@@ -32,7 +33,16 @@ export class DetalhesComponent implements OnInit {
   getDetalhes() {
     this.tmdApiService.getDetails(this.id);
     this.tmdApiService.currentDetail$.subscribe((detalhes) => {
-      this.details$ = detalhes;
+      detalhes.subscribe((detail) => {
+        this.detail$ = detail;
+      });
     });
+  }
+
+  getGenres() {
+    if (this.detail$) {
+      return this.detail$.genres.map((genre) => genre.name).join(', ');
+    }
+    return;
   }
 }

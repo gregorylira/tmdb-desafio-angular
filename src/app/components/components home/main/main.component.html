@@ -2,6 +2,8 @@
   <app-card-movie
     *ngFor="let filme of filmes$ | async"
     [movie]="filme"
+    routerLink="/details/{{ filme.id }}"
   ></app-card-movie>
+
   <button (click)="nextPage()"></button>
 </div>

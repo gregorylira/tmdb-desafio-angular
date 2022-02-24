@@ -69,7 +69,7 @@ export class TmdbApiService {
   getDetails(id: string): void {
     this.detail$ = this.http.get<RootDetail>(
       this.base_URL +
-        `movie/${id}?api_key=${environment.API_KEY}&language=en-US`
+        `movie/${id}?api_key=${environment.API_KEY}&language=pt-BR`
     );
     this.detail$ = this.detail$.pipe(map((root) => root));
     this.detailsSource.next(this.detail$);
