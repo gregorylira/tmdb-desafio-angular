@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
     if (this.filter.find((genre) => genre === novofiltro)) {
       this.filter = this.filter.filter((item) => item !== novofiltro);
     } else {
+      this.tmdbapiService.setPaginas(1);
       this.filter = [...this.filter, novofiltro];
     }
     this.tmdbapiService.getPopulares(this.filter);

@@ -49,6 +49,8 @@
     .participantes {
       display: flex;
       gap: 1rem;
+      max-width: 50%;
+      flex-wrap: wrap;
       div {
         margin-right: 33px;
         padding: 1rem 1rem 1rem 0;

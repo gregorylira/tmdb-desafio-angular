@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cast } from 'src/app/model/Participantes';
+import { Cast, Crew } from 'src/app/model/Participantes';
 import { TmdbApiService } from 'src/app/service/tmdb-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -13,6 +13,9 @@ import { RootDetail } from 'src/app/model/Details';
 })
 export class DetalhesComponent implements OnInit {
   participantes$?: Observable<Cast[]>;
+  producao$?: Observable<Crew[]>;
+  fiveParticipantes$?: Cast[];
+  fiveProducao$?: Crew[];
   detail$?: RootDetail;
   @Input() id: string = '1';
 
@@ -21,12 +24,17 @@ export class DetalhesComponent implements OnInit {
   ngOnInit(): void {
     this.getDetalhes();
     this.getParticipantes();
+    this.getFiveParticipantes();
+    this.getFiveProducao();
   }
 
   getParticipantes() {
     this.tmdApiService.getParticipantes(this.id);
     this.tmdApiService.currentParticipantes$.subscribe(
       (participantes) => (this.participantes$ = participantes)
+    );
+    this.tmdApiService.currentProcucao$.subscribe(
+      (producao) => (this.producao$ = producao)
     );
   }
 
@@ -35,6 +43,7 @@ export class DetalhesComponent implements OnInit {
     this.tmdApiService.currentDetail$.subscribe((detalhes) => {
       detalhes.subscribe((detail) => {
         this.detail$ = detail;
+        console.log(this.detail$);
       });
     });
   }
@@ -44,5 +53,16 @@ export class DetalhesComponent implements OnInit {
       return this.detail$.genres.map((genre) => genre.name).join(', ');
     }
     return;
+  }
+
+  getFiveParticipantes() {
+    this.participantes$?.subscribe((participantes) => {
+      this.fiveParticipantes$ = participantes.slice(0, 5);
+    });
+  }
+  getFiveProducao() {
+    this.producao$?.subscribe((producao) => {
+      this.fiveProducao$ = producao.slice(0, 5);
+    });
   }
 }

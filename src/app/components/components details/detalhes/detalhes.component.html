@@ -18,25 +18,13 @@
       <h3>Sinopse</h3>
       <span>{{ detail$.overview }} </span>
       <div class="participantes">
-        <div>
-          <h4>Rob Liedeld</h4>
-          <span>Characters</span>
+        <div *ngFor="let participante of fiveParticipantes$">
+          <h4>{{ participante.name }}</h4>
+          <span>{{ participante.known_for_department }}</span>
         </div>
-        <div>
-          <h4>Rob Liedeld</h4>
-          <span>Characters</span>
-        </div>
-        <div>
-          <h4>Rob Liedeld</h4>
-          <span>Characters</span>
-        </div>
-        <div>
-          <h4>Rob Liedeld</h4>
-          <span>Characters</span>
-        </div>
-        <div>
-          <h4>Rob Liedeld</h4>
-          <span>Characters</span>
+        <div *ngFor="let participante of fiveProducao$">
+          <h4>{{ participante.name }}</h4>
+          <span>{{ participante.known_for_department }}</span>
         </div>
       </div>
     </div>
@@ -47,6 +35,7 @@
   <div class="lista-elenco">
     <div *ngFor="let participante of participantes$ | async">
       <app-card-participantes
+        *ngIf="participante.profile_path"
         [participante]="participante"
       ></app-card-participantes>
     </div>

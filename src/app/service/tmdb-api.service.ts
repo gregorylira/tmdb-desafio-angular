@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Result, RootObject } from 'src/app/model/Filmes';
 import { map, Observable, of, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Cast, ParticipantesRoot } from '../model/Participantes';
+import { Cast, Crew, ParticipantesRoot } from '../model/Participantes';
 import { RootDetail } from '../model/Details';
 
 @Injectable({
@@ -18,6 +18,10 @@ export class TmdbApiService {
     {} as Observable<Cast[]>
   );
 
+  private producaoSource = new BehaviorSubject<Observable<Crew[]>>(
+    {} as Observable<Crew[]>
+  );
+
   private detailsSource = new BehaviorSubject<Observable<RootDetail>>(
     {} as Observable<RootDetail>
   );
@@ -29,6 +33,9 @@ export class TmdbApiService {
   currentParticipantes$ = this.participantesSource.asObservable();
   participantes$?: Observable<Cast[]>;
   rootParticipantes$?: Observable<ParticipantesRoot>;
+
+  currentProcucao$ = this.producaoSource.asObservable();
+  producao$?: Observable<Crew[]>;
 
   currentDetail$ = this.detailsSource.asObservable();
   detail$?: Observable<RootDetail>;
@@ -63,7 +70,10 @@ export class TmdbApiService {
     this.participantes$ = this.rootParticipantes$.pipe(
       map((root) => root.cast)
     );
+    this.producao$ = this.rootParticipantes$.pipe(map((root) => root.crew));
+
     this.participantesSource.next(this.participantes$);
+    this.producaoSource.next(this.producao$);
   }
 
   getDetails(id: string): void {
