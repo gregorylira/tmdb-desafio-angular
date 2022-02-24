@@ -1,0 +1,8 @@
+<div class="cardParticipante" *ngIf="participante">
+  <img
+    src="{{ 'https://image.tmdb.org/t/p/w500' + participante.profile_path }}"
+    alt="participanteLogo"
+  />
+  <h4>{{ participante.name }}</h4>
+  <span>{{ participante.character }}</span>
+</div>

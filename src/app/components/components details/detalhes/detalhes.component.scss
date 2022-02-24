@@ -1,0 +1,80 @@
+.detalhes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--purple);
+  height: 700px;
+
+  aside {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: row;
+    width: 88%;
+    margin-top: 6rem;
+    gap: 1rem;
+    color: var(--shape);
+
+    .detalhesTotal {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .logoimagem {
+      width: 25%;
+      height: 670px;
+      border-radius: 0.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+    h2 + span {
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+    .avaliacao {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-weight: 400;
+    }
+    h3 {
+      font-size: 1.2rem;
+    }
+    h3 + span {
+      font-weight: 400;
+      width: 60%;
+    }
+    .participantes {
+      display: flex;
+      gap: 1rem;
+      div {
+        margin-right: 33px;
+        padding: 1rem 1rem 1rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        span {
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}
+.elenco {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 4rem 7rem;
+  gap: 1rem;
+  h3 {
+    font-size: 2rem;
+  }
+  .lista-elenco {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    overflow: scroll;
+  }
+}

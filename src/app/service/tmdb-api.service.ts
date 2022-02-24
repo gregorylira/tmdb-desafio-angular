@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Result, RootObject } from 'src/app/model/Filmes';
 import { map, Observable, of, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Cast, ParticipantesRoot } from '../model/Participantes';
+import { RootDetail } from '../model/Details';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +14,25 @@ export class TmdbApiService {
   private filmesSource = new BehaviorSubject<Observable<Result[]>>(
     {} as Observable<Result[]>
   );
+  private participantesSource = new BehaviorSubject<Observable<Cast[]>>(
+    {} as Observable<Cast[]>
+  );
+
+  private detailsSource = new BehaviorSubject<Observable<RootDetail>>(
+    {} as Observable<RootDetail>
+  );
+
   currentFilmes$ = this.filmesSource.asObservable();
   filmes$?: Observable<Result[]>;
   root$?: Observable<RootObject>;
+
+  currentParticipantes$ = this.participantesSource.asObservable();
+  participantes$?: Observable<Cast[]>;
+  rootParticipantes$?: Observable<ParticipantesRoot>;
+
+  currentDetail$ = this.detailsSource.asObservable();
+  detail$?: Observable<RootDetail>;
+
   private readonly base_URL = 'https://api.themoviedb.org/3/';
   paginas: number = 1;
 
@@ -35,6 +53,26 @@ export class TmdbApiService {
     }
     this.filmes$ = this.root$.pipe(map((root) => root.results));
     this.filmesSource.next(this.filmes$);
+  }
+
+  getParticipantes(id: string): void {
+    this.rootParticipantes$ = this.http.get<ParticipantesRoot>(
+      this.base_URL +
+        `movie/${id}/credits?api_key=${environment.API_KEY}&language=en-US`
+    );
+    this.participantes$ = this.rootParticipantes$.pipe(
+      map((root) => root.cast)
+    );
+    this.participantesSource.next(this.participantes$);
+  }
+
+  getDetails(id: string): void {
+    this.detail$ = this.http.get<RootDetail>(
+      this.base_URL +
+        `movie/${id}?api_key=${environment.API_KEY}&language=en-US`
+    );
+    this.detail$ = this.detail$.pipe(map((root) => root));
+    this.detailsSource.next(this.detail$);
   }
 
   getPaginas(): number {

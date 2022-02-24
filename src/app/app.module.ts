@@ -8,6 +8,9 @@ import { DashboardComponent } from './components/components home/dashboard/dashb
 import { MainComponent } from './components/components home/main/main.component';
 import { CardMovieComponent } from './components/card-movie/card-movie.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DetalhesComponent } from './components/components details/detalhes/detalhes.component';
+import { CardParticipantesComponent } from './components/components details/card-participantes/card-participantes.component';
+import { DetailsPageComponent } from './pages/details-page/details-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
@@ -18,6 +21,9 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     MainComponent,
     CardMovieComponent,
     HomePageComponent,
+    DetalhesComponent,
+    CardParticipantesComponent,
+    DetailsPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
