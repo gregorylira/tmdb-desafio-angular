@@ -94,6 +94,13 @@ export class TmdbApiService {
     return trailerRoot.pipe(map((root) => root.results[0].key));
   }
 
+  getRecomendacoes(id: string) {
+    return this.http.get<RootObject>(
+      this.base_URL +
+        `movie/${id}/recommendations?api_key=${environment.API_KEY}&language=en-US&page=1`
+    );
+  }
+
   getPaginas(): number {
     return this.paginas;
   }
