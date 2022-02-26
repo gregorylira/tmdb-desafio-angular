@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { RootDetail } from 'src/app/model/Details';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Result } from 'src/app/model/Filmes';
 
 @Component({
   selector: 'app-detalhes',
@@ -20,7 +21,11 @@ export class DetalhesComponent implements OnInit {
   detail$?: RootDetail;
   trailer$?: Observable<String>;
   linkVideo: string = 'a';
-  safeUrl: any;
+  safeUrl?: SafeResourceUrl;
+  recomendacoes$?: Observable<Result[]>;
+
+  idademinima?: Observable<String>;
+
   @Input() id: string = '1';
 
   constructor(
@@ -34,6 +39,7 @@ export class DetalhesComponent implements OnInit {
     this.getFiveParticipantes();
     this.getFiveProducao();
     this.getTrailer();
+    this.getRecomendacoes();
   }
 
   getParticipantes() {
@@ -54,6 +60,10 @@ export class DetalhesComponent implements OnInit {
         console.log(this.detail$);
       });
     });
+  }
+
+  getIdadeMinima() {
+    this.idademinima = this.tmdApiService.getIdadeMinima(this.id);
   }
 
   getGenres() {
@@ -81,5 +91,12 @@ export class DetalhesComponent implements OnInit {
         'https://www.youtube.com/embed/' + link
       );
     });
+  }
+
+  getRecomendacoes() {
+    this.tmdApiService.getRecomendacoes(this.id);
+    this.tmdApiService.currentFilmes$.subscribe(
+      (recomendacoes) => (this.recomendacoes$ = recomendacoes)
+    );
   }
 }

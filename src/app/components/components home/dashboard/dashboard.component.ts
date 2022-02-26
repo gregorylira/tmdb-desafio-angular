@@ -13,8 +13,12 @@ export class DashboardComponent implements OnInit {
   filmes$?: Observable<Result[]>;
 
   constructor(public tmdbapiService: TmdbApiService) {
+    this.tmdbapiService.filtros.subscribe((filtros) => {
+      this.filter = filtros;
+    });
     this.tmdbapiService.getPopulares([...this.filter]);
     this.filmes$ = this.tmdbapiService.filmes$;
+    console.log(this.filter);
   }
 
   ngOnInit(): void {}

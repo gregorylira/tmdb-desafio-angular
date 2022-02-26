@@ -13,7 +13,6 @@ export class MainComponent implements OnInit {
   @Input() filtros: string[] = [];
 
   constructor(public tmdbapiService: TmdbApiService) {
-    this.tmdbapiService.getPopulares([...this.filtros]);
     this.tmdbapiService.currentFilmes$.subscribe(
       (filmes) => (this.filmes$ = filmes)
     );

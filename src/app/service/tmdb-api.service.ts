@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { Result, RootObject } from 'src/app/model/Filmes';
-import { map, Observable, of, BehaviorSubject } from 'rxjs';
+import { map, Observable, of, BehaviorSubject, find } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Cast, Crew, ParticipantesRoot } from '../model/Participantes';
 import { RootDetail } from '../model/Details';
 import { TrailerRoot } from '../model/Trailer';
+import { IdadeRoot } from '../model/IdadeMinima';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,10 @@ export class TmdbApiService {
   private detailsSource = new BehaviorSubject<Observable<RootDetail>>(
     {} as Observable<RootDetail>
   );
+
+  private listaFiltros = new BehaviorSubject<string[]>([]);
+  filtros = this.listaFiltros.asObservable();
+  contentFiltros: string[] = [];
 
   currentFilmes$ = this.filmesSource.asObservable();
   filmes$?: Observable<Result[]>;
@@ -48,17 +53,27 @@ export class TmdbApiService {
 
   getPopulares(filtro: string[]): void {
     if (filtro?.length) {
-      console.log(filtro);
       this.root$ = this.http.get<RootObject>(
         this.base_URL +
           `discover/movie?api_key=${environment.API_KEY}&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.paginas}&with_genres=${filtro}&with_watch_monetization_types=flatrate`
       );
+
+      this.listaFiltros.next(filtro);
     } else {
       this.root$ = this.http.get<RootObject>(
         this.base_URL +
           `movie/popular?api_key=${environment.API_KEY}&language=en-US&page=${this.paginas}`
       );
     }
+    this.filmes$ = this.root$.pipe(map((root) => root.results));
+    this.filmesSource.next(this.filmes$);
+  }
+
+  getRecomendacoes(id: string) {
+    this.root$ = this.http.get<RootObject>(
+      this.base_URL +
+        `movie/${id}/recommendations?api_key=${environment.API_KEY}&language=en-US&page=1`
+    );
     this.filmes$ = this.root$.pipe(map((root) => root.results));
     this.filmesSource.next(this.filmes$);
   }
@@ -86,6 +101,19 @@ export class TmdbApiService {
     this.detailsSource.next(this.detail$);
   }
 
+  getIdadeMinima(id: string): Observable<String> {
+    const idadeMinimaRoot = this.http.get<IdadeRoot>(
+      this.base_URL + `movie/${id}/release_dates?api_key=${environment.API_KEY}`
+    );
+    // procurar o Brasil no is_3166_1
+    const idadeMinimaResults = idadeMinimaRoot.pipe(
+      map((root) => root.results.filter((result) => result.iso_3166_1 === 'BR'))
+    );
+    return idadeMinimaResults.pipe(
+      map((results) => results[0].release_dates[0].certification)
+    );
+  }
+
   getTrailer(id: string): Observable<String> {
     const trailerRoot = this.http.get<TrailerRoot>(
       this.base_URL +
@@ -94,18 +122,10 @@ export class TmdbApiService {
     return trailerRoot.pipe(map((root) => root.results[0].key));
   }
 
-  getRecomendacoes(id: string) {
-    return this.http.get<RootObject>(
-      this.base_URL +
-        `movie/${id}/recommendations?api_key=${environment.API_KEY}&language=en-US&page=1`
-    );
-  }
-
   getPaginas(): number {
     return this.paginas;
   }
   setPaginas(paginas: number): void {
     this.paginas = paginas;
-    console.log(this.paginas);
   }
 }

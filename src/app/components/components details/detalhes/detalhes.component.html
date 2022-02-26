@@ -45,8 +45,6 @@
   <h3>Trailer</h3>
   <div class="trailer-video">
     <iframe
-      width="560"
-      height="315"
       [src]="safeUrl"
       title="YouTube video player"
       frameborder="0"
@@ -55,4 +53,15 @@
     ></iframe>
   </div>
 </div>
-<div class="recomendacoes"></div>
+<div class="recomendacoes">
+  <h3>Recomendações</h3>
+  <div class="lista-recomendacoes">
+    <div *ngFor="let filme of recomendacoes$ | async">
+      <app-card-movie
+        *ngIf="filme.poster_path"
+        [movie]="filme"
+        routerLink="/details/{{ filme.id }}"
+      ></app-card-movie>
+    </div>
+  </div>
+</div>
