@@ -1,27 +1,53 @@
-# TmdDesafio
+# Introdução
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.4.
+Estra aplicação é um desafio proposto pela promobit, é uma aplicação que consome uma api de filmes, onde o usuario pode listar os filmes populares do dia quanto tempo pode filtrar filmes por genero.
 
-## Development server
+## O desafio
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Usando a API de filmes gratuita themoviedb em sua versão 3, você será responsável por criar uma listagem dos filmes mais populares do dia, consultando o endpoint GET /movie/popular para realizar a listagem. Ao clicar em um item dessa listagem, outra página com os detalhes do filme escolhido deve ser exibida. Para acessar mais detalhes sobre o filme, você pode consultar o endpoint GET /movie/{movie_id}.
 
-## Code scaffolding
+Para garantir que o usuário encontre o filme que está procurando, essa lista deverá ser paginada.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Siga o layout do figma sugerido. Não há necessidade de ser pixel perfect mas respeite a composição, fontes e cores.
+
+## Requisitos funcionais
+
+[ x ] O usuário deve ter acesso a uma listagem dos filmes mais populares do dia
+
+[ x ] O usuário deve conseguir paginar a lista para encontrar novos filmes
+
+[ x ] O usuário deve ter acesso a uma outra página com detalhes sobre o filme, ao clicar em um item na listagem
+
+[ x ] O usuário deve conseguir voltar para a página de listagem de filmes com os filtros ainda ativos
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+[ x ] O app deverá ser criado usando React
 
-## Running unit tests
+[ x ] Na raiz do projeto, será necessário incluir um arquivo README.md com as instruções para construir seu projeto localmente. Opcionalmente você pode detalhar as razões pelas escolhas de ferramentas e técnicas aplicadas ao desafio.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+[ x ] O app deverá se comportar da mesma forma na última versão estável dos seguintes browsers: Chrome, Firefox, Edge
 
-## Running end-to-end tests
+[ x ] O app deverá ser responsivo
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Extras
 
-## Further help
+Temos insights que nos levam a acreditar que os usuários dessa lista costumam ter uma experiência melhor se conseguirem criar um filtro usando seus gêneros favoritos. Portanto, você também poderá criar filtros de filmes por gênero nessa listagem. Note que um novo endpoint deverá ser consultado para obter uma lista dos possíveis gêneros a serem filtrados, GET /genre/movie/list.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+[ x ] O usuário deve conseguir filtrar os filmes listados por gênero, com a possibilidade de usar mais de um gênero
+[ x ] O usuário deve conseguir remover filtros e a listagem deve ser atualizada de acordo com o filtro removido
+[ x ] A página com detalhes de um filme deve possuir uma rota própria e estar preparada para ser indexada em mecanismos de pesquisa
+
+## Como instalar
+
+1 - primeiro dê o clone
+2 - na pasta raiz basta dar um yarn, ou um npm install
+3 - na pasta raiz, criar uma .env com a api key com o nome API_KEY
+4 - execução -> yarn start or npm run start
+
+## Tecnologias utilizadas
+
+- Angular CLI
+- API do TMDB de filmes
+- scss
+- typescript
