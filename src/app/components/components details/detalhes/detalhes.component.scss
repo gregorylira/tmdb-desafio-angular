@@ -81,3 +81,19 @@
     overflow-y: hidden;
   }
 }
+.trailer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 4rem 7rem;
+  gap: 1rem;
+  h3 {
+    font-size: 2rem;
+  }
+  .trailer-video {
+    iframe {
+      width: 60%;
+      height: 500px;
+    }
+  }
+}

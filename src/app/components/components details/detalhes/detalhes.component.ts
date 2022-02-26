@@ -5,6 +5,7 @@ import { TmdbApiService } from 'src/app/service/tmdb-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { RootDetail } from 'src/app/model/Details';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-detalhes',
@@ -17,15 +18,22 @@ export class DetalhesComponent implements OnInit {
   fiveParticipantes$?: Cast[];
   fiveProducao$?: Crew[];
   detail$?: RootDetail;
+  trailer$?: Observable<String>;
+  linkVideo: string = 'a';
+  safeUrl: any;
   @Input() id: string = '1';
 
-  constructor(public tmdApiService: TmdbApiService) {}
+  constructor(
+    public tmdApiService: TmdbApiService,
+    private _sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit(): void {
     this.getDetalhes();
     this.getParticipantes();
     this.getFiveParticipantes();
     this.getFiveProducao();
+    this.getTrailer();
   }
 
   getParticipantes() {
@@ -63,6 +71,15 @@ export class DetalhesComponent implements OnInit {
   getFiveProducao() {
     this.producao$?.subscribe((producao) => {
       this.fiveProducao$ = producao.slice(0, 5);
+    });
+  }
+
+  getTrailer() {
+    this.trailer$ = this.tmdApiService.getTrailer(this.id);
+    this.trailer$.subscribe((link) => {
+      this.safeUrl = this._sanitizer.bypassSecurityTrustResourceUrl(
+        'https://www.youtube.com/embed/' + link
+      );
     });
   }
 }

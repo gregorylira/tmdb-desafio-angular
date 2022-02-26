@@ -6,6 +6,7 @@ import { map, Observable, of, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Cast, Crew, ParticipantesRoot } from '../model/Participantes';
 import { RootDetail } from '../model/Details';
+import { TrailerRoot } from '../model/Trailer';
 
 @Injectable({
   providedIn: 'root',
@@ -83,6 +84,14 @@ export class TmdbApiService {
     );
     this.detail$ = this.detail$.pipe(map((root) => root));
     this.detailsSource.next(this.detail$);
+  }
+
+  getTrailer(id: string): Observable<String> {
+    const trailerRoot = this.http.get<TrailerRoot>(
+      this.base_URL +
+        `movie/${id}/videos?api_key=${environment.API_KEY}&language=en-US`
+    );
+    return trailerRoot.pipe(map((root) => root.results[0].key));
   }
 
   getPaginas(): number {

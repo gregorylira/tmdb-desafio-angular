@@ -12,6 +12,7 @@ import { DetalhesComponent } from './components/components details/detalhes/deta
 import { CardParticipantesComponent } from './components/components details/card-participantes/card-participantes.component';
 import { DetailsPageComponent } from './pages/details-page/details-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { SafePipe } from './pipe/safe';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     DetalhesComponent,
     CardParticipantesComponent,
     DetailsPageComponent,
+    SafePipe,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
