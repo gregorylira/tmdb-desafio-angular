@@ -14,7 +14,7 @@ Siga o [layout do figma](https://www.figma.com/file/rM7WPqhLY9ObnGzSCeWLxB/Teste
 
 [ x ] O usuário deve ter acesso a uma listagem dos filmes mais populares do dia
 
-[ x ] O usuário deve conseguir paginar a lista para encontrar novos filmes
+[ + - ] O usuário deve conseguir paginar a lista para encontrar novos filmes
 
 [ x ] O usuário deve ter acesso a uma outra página com detalhes sobre o filme, ao clicar em um item na listagem
 
