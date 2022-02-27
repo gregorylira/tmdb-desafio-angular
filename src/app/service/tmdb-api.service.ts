@@ -32,6 +32,15 @@ export class TmdbApiService {
   filtros = this.listaFiltros.asObservable();
   contentFiltros: string[] = [];
 
+  private rootSource = new BehaviorSubject<Observable<RootObject>>(
+    {} as Observable<RootObject>
+  );
+  currentRoot = this.rootSource.asObservable();
+
+  root2$?: Observable<RootObject>;
+
+  quantidadePaginas?: Observable<Number>;
+
   currentFilmes$ = this.filmesSource.asObservable();
   filmes$?: Observable<Result[]>;
   root$?: Observable<RootObject>;
@@ -66,7 +75,9 @@ export class TmdbApiService {
       );
     }
     this.filmes$ = this.root$.pipe(map((root) => root.results));
+
     this.filmesSource.next(this.filmes$);
+    this.rootSource.next(this.root$);
   }
 
   getRecomendacoes(id: string) {
