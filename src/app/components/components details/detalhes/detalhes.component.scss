@@ -103,14 +103,16 @@
   width: 90%;
   margin: 4rem 7rem;
   height: 800px;
+  overflow-x: scroll;
+
   h3 {
     font-size: 2rem;
   }
   .lista-recomendacoes {
     display: flex;
+    flex-direction: row;
     height: 350px;
     gap: 1rem;
-    overflow: scroll;
     overflow-y: hidden;
   }
 }
