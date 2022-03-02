@@ -110,5 +110,6 @@ export class DetalhesComponent implements OnInit {
   load(id: number) {
     this.location.go('/details/' + id);
     location.reload();
+    window.scrollTo(0, 0);
   }
 }
