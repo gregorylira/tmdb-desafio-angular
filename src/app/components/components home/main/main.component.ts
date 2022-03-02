@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { root } from 'cheerio/lib/static';
 import { Observable } from 'rxjs';
-import { CardMovieProps, Result, RootObject } from 'src/app/model/Filmes';
+import { Result, RootObject } from 'src/app/model/Filmes';
 import { TmdbApiService } from '../../../service/tmdb-api.service';
 
 @Component({
