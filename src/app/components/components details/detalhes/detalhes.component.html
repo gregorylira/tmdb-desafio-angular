@@ -60,6 +60,7 @@
       <app-card-movie
         *ngFor="let filme of recomendacoes$ | async"
         [movie]="filme"
+        routerLink="/details/{{ filme.id }}"
         (click)="load(filme.id)"
       ></app-card-movie>
     </div>
