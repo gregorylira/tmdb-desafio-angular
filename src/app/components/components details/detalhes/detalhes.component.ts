@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cast, Crew } from 'src/app/model/Participantes';
 import { TmdbApiService } from 'src/app/service/tmdb-api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { RootDetail } from 'src/app/model/Details';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -30,8 +30,13 @@ export class DetalhesComponent implements OnInit {
 
   constructor(
     public tmdApiService: TmdbApiService,
-    private _sanitizer: DomSanitizer
-  ) {}
+    private _sanitizer: DomSanitizer,
+    private route: ActivatedRoute,
+    private routerR: Router
+  ) {
+    this.route.params.subscribe((params) => (this.id = params['id']));
+    console.log(this.id);
+  }
 
   ngOnInit(): void {
     this.getDetalhes();
@@ -98,5 +103,12 @@ export class DetalhesComponent implements OnInit {
     this.tmdApiService.currentFilmes$.subscribe(
       (recomendacoes) => (this.recomendacoes$ = recomendacoes)
     );
+  }
+
+  load(id: number) {
+    this.routerR.navigate(['/details', id]).then(() => {
+      window.location.reload();
+      window.scrollTo(0, 0);
+    });
   }
 }

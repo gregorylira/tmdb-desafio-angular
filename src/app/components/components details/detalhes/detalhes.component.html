@@ -56,11 +56,11 @@
 <div class="recomendacoes">
   <h3>Recomendações</h3>
   <div class="lista-recomendacoes">
-    <div *ngFor="let filme of recomendacoes$ | async">
+    <div class="lista-recomendacoes">
       <app-card-movie
-        *ngIf="filme.poster_path"
+        *ngFor="let filme of recomendacoes$ | async"
         [movie]="filme"
-        routerLink="/details/{{ filme.id }}"
+        (click)="load(filme.id)"
       ></app-card-movie>
     </div>
   </div>
