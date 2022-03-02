@@ -102,12 +102,13 @@
   flex-direction: column;
   width: 90%;
   margin: 4rem 7rem;
-  height: 400px;
+  height: 800px;
   h3 {
     font-size: 2rem;
   }
   .lista-recomendacoes {
     display: flex;
+    height: 350px;
     gap: 1rem;
     overflow: scroll;
     overflow-y: hidden;

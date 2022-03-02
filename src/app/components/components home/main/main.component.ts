@@ -11,7 +11,7 @@ import { TmdbApiService } from '../../../service/tmdb-api.service';
 })
 export class MainComponent implements OnInit {
   filmes$?: Observable<Result[]>;
-  quantidadepaginas: number = 0;
+  quantidadepaginas?: number;
   offset?: number;
   root$?: Observable<RootObject>;
   @Input() filtros: string[] = [];
@@ -20,18 +20,23 @@ export class MainComponent implements OnInit {
     this.tmdbapiService.currentFilmes$.subscribe(
       (filmes) => (this.filmes$ = filmes)
     );
-    this.tmdbapiService.currentRoot.subscribe((root) => {
-      this.root$ = root;
-    });
   }
 
-  ngOnInit(): void {
-    this.getOffset();
-    console.log(this.offset);
-  }
+  ngOnInit(): void {}
 
   nextPage(): void {
     this.tmdbapiService.setPaginas(this.tmdbapiService.getPaginas() + 1);
+    this.tmdbapiService.getPopulares([]);
+    this.tmdbapiService.currentFilmes$.subscribe(
+      (filmes) => (this.filmes$ = filmes)
+    );
+  }
+  previousPage(): void {
+    this.tmdbapiService.setPaginas(
+      this.tmdbapiService.getPaginas() > 1
+        ? this.tmdbapiService.getPaginas() - 1
+        : 1
+    );
     this.tmdbapiService.getPopulares([]);
     this.tmdbapiService.currentFilmes$.subscribe(
       (filmes) => (this.filmes$ = filmes)

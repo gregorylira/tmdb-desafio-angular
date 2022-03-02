@@ -5,11 +5,6 @@
     routerLink="/details/{{ filme.id }}"
   ></app-card-movie>
 
-  <button (click)="nextPage()"></button>
+  <button (click)="previousPage()">Anterior</button>
+  <button (click)="nextPage()">Proxima</button>
 </div>
-<app-pagination
-  [limit]="20"
-  [total]="offset | async"
-  [offset]="offset"
-  [setOffset]="setOffset"
-></app-pagination>

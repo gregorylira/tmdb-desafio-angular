@@ -13,7 +13,6 @@ import { CardParticipantesComponent } from './components/components details/card
 import { DetailsPageComponent } from './pages/details-page/details-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SafePipe } from './pipe/safe';
-import { PaginationComponent } from './components/components home/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import { PaginationComponent } from './components/components home/pagination/pag
     CardParticipantesComponent,
     DetailsPageComponent,
     SafePipe,
-    PaginationComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

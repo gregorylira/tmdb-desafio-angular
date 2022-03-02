@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Result } from 'src/app/model/Filmes';
+import { map, Observable } from 'rxjs';
+import { Result, RootObject } from 'src/app/model/Filmes';
 import { TmdbApiService } from '../../../service/tmdb-api.service';
 
 @Component({
@@ -11,14 +11,15 @@ import { TmdbApiService } from '../../../service/tmdb-api.service';
 export class DashboardComponent implements OnInit {
   filter: string[] = [];
   filmes$?: Observable<Result[]>;
+  rootObject$?: Observable<RootObject>;
 
   constructor(public tmdbapiService: TmdbApiService) {
     this.tmdbapiService.filtros.subscribe((filtros) => {
       this.filter = filtros;
     });
     this.tmdbapiService.getPopulares([...this.filter]);
-    this.filmes$ = this.tmdbapiService.filmes$;
-    console.log(this.filter);
+
+    this.rootObject$ = this.tmdbapiService.root$;
   }
 
   ngOnInit(): void {}
