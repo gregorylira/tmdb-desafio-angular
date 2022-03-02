@@ -21,6 +21,5 @@ export class DetailsPageComponent implements OnInit {
     if (i) {
       this.id = i;
     }
-    console.log(this.id);
   }
 }

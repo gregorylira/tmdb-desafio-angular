@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { RootDetail } from 'src/app/model/Details';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Result } from 'src/app/model/Filmes';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-detalhes',
@@ -32,13 +33,15 @@ export class DetalhesComponent implements OnInit {
     public tmdApiService: TmdbApiService,
     private _sanitizer: DomSanitizer,
     private route: ActivatedRoute,
-    private routerR: Router
+    private routerR: Router,
+    private location: Location
   ) {
     this.route.params.subscribe((params) => (this.id = params['id']));
-    console.log(this.id);
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params) => (this.id = params['id']));
+    console.log(this.id);
     this.getDetalhes();
     this.getParticipantes();
     this.getFiveParticipantes();
@@ -62,7 +65,6 @@ export class DetalhesComponent implements OnInit {
     this.tmdApiService.currentDetail$.subscribe((detalhes) => {
       detalhes.subscribe((detail) => {
         this.detail$ = detail;
-        console.log(this.detail$);
       });
     });
   }
@@ -106,9 +108,7 @@ export class DetalhesComponent implements OnInit {
   }
 
   load(id: number) {
-    this.routerR.navigate(['/details', id]).then(() => {
-      window.location.reload();
-      window.scrollTo(0, 0);
-    });
+    this.location.go('/details/' + id);
+    location.reload();
   }
 }

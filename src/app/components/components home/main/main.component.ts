@@ -51,12 +51,4 @@ export class MainComponent implements OnInit {
     }
     // console.log(offset);
   };
-
-  getOffset() {
-    if (this.root$)
-      this.root$.subscribe((root) => {
-        this.offset = root.total_results;
-        console.log(this.offset);
-      });
-  }
 }

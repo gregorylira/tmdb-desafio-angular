@@ -13,6 +13,7 @@ import { CardParticipantesComponent } from './components/components details/card
 import { DetailsPageComponent } from './pages/details-page/details-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SafePipe } from './pipe/safe';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { SafePipe } from './pipe/safe';
     DetailsPageComponent,
     SafePipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, RouterModule],
   providers: [],
   bootstrap: [AppComponent],
 })
