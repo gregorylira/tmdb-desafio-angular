@@ -35,15 +35,17 @@ export class TmdbApiService {
   private rootSource = new BehaviorSubject<Observable<RootObject>>(
     {} as Observable<RootObject>
   );
-  currentRoot = this.rootSource.asObservable();
+  currentRoot$ = this.rootSource.asObservable();
+  root$?: Observable<RootObject>;
 
-  root2$?: Observable<RootObject>;
-
-  quantidadePaginas?: Observable<Number>;
+  private quantidadePaginasSource = new BehaviorSubject<Observable<number>>(
+    {} as Observable<number>
+  );
+  // quantidadepaginas?: Observable<number>;
+  quantidadepaginas = this.quantidadePaginasSource.asObservable();
 
   currentFilmes$ = this.filmesSource.asObservable();
   filmes$?: Observable<Result[]>;
-  root$?: Observable<RootObject>;
 
   currentParticipantes$ = this.participantesSource.asObservable();
   participantes$?: Observable<Cast[]>;
@@ -61,7 +63,7 @@ export class TmdbApiService {
   constructor(private http: HttpClient) {}
 
   getPopulares(filtro: string[]): void {
-    if (filtro?.length) {
+    if (filtro?.length | this.contentFiltros?.length) {
       this.root$ = this.http.get<RootObject>(
         this.base_URL +
           `discover/movie?api_key=${environment.API_KEY}&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.paginas}&with_genres=${filtro}&with_watch_monetization_types=flatrate`
@@ -78,6 +80,7 @@ export class TmdbApiService {
 
     this.filmesSource.next(this.filmes$);
     this.rootSource.next(this.root$);
+    this.quantiPaginas();
   }
 
   getRecomendacoes(id: string) {
@@ -133,10 +136,22 @@ export class TmdbApiService {
     return trailerRoot.pipe(map((root) => root.results[0].key));
   }
 
+  getFiltros() {
+    return this.filtros.subscribe((filtro) => (this.contentFiltros = filtro));
+  }
+
   getPaginas(): number {
     return this.paginas;
   }
   setPaginas(paginas: number): void {
     this.paginas = paginas;
+  }
+  quantiPaginas() {
+    if (this.root$) {
+      const quantidadepaginas = this.root$?.pipe(
+        map((root) => root.total_pages)
+      );
+      this.quantidadePaginasSource.next(quantidadepaginas);
+    }
   }
 }

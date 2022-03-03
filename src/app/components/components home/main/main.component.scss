@@ -16,3 +16,33 @@
     height: 30px;
   }
 }
+.sistemaButoes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 4rem;
+  height: 80px;
+  gap: 0.5rem;
+
+  button {
+    border: 0;
+    border-radius: 0.5rem;
+    background: var(--purple);
+    color: white;
+    width: 60px;
+    height: 40px;
+
+    &:hover {
+      background: var(--purple-light);
+    }
+
+    &.active {
+      background: var(--orange);
+
+      &:hover {
+        background: orangered;
+      }
+    }
+  }
+}

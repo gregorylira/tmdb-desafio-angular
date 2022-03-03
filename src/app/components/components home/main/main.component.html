@@ -4,7 +4,15 @@
     [movie]="filme"
     routerLink="/details/{{ filme.id }}"
   ></app-card-movie>
-
+</div>
+<div class="sistemaButoes">
   <button (click)="previousPage()">Anterior</button>
+  <button
+    *ngFor="let item of forIn(quantidadepaginas | async); let index = index"
+    (click)="changePage(index + 1)"
+    [ngClass]="{ active: paginaAtual == index + 1 }"
+  >
+    {{ index + 1 }}
+  </button>
   <button (click)="nextPage()">Proxima</button>
 </div>
