@@ -28,9 +28,7 @@ export class MainComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
-    // this.quantiPaginas();
-  }
+  ngOnInit(): void {}
 
   nextPage(): void {
     this.tmdbapiService.setPaginas(this.tmdbapiService.getPaginas() + 1);
@@ -44,6 +42,7 @@ export class MainComponent implements OnInit {
 
   forIn(number: number | null) {
     let minValue = number;
+    let first = 0;
     if (minValue === null) {
       minValue = 1;
       return Array(minValue);
@@ -51,7 +50,10 @@ export class MainComponent implements OnInit {
     if (minValue > 9) {
       minValue = 9;
     }
-    return Array(minValue);
+    if (this.paginaAtual)
+      first = Math.max(this.tmdbapiService.getPaginas() - 4, 0);
+
+    return Array.from(Array(minValue).keys()).map((_, index) => index + first);
   }
 
   changePage(page: number): void {

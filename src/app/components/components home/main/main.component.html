@@ -8,11 +8,11 @@
 <div class="sistemaButoes">
   <button (click)="previousPage()">Anterior</button>
   <button
-    *ngFor="let item of forIn(quantidadepaginas | async); let index = index"
-    (click)="changePage(index + 1)"
-    [ngClass]="{ active: paginaAtual == index + 1 }"
+    *ngFor="let item of forIn(quantidadepaginas | async)"
+    (click)="changePage(item + 1)"
+    [ngClass]="{ active: this.tmdbapiService.getPaginas() == item + 1 }"
   >
-    {{ index + 1 }}
+    {{ item + 1 }}
   </button>
   <button (click)="nextPage()">Proxima</button>
 </div>
