@@ -51,3 +51,6 @@ Temos insights que nos levam a acreditar que os usuários dessa lista costumam t
 - API do TMDB de filmes
 - scss
 - typescript
+
+## Link overview Deploy in Netlify
+https://tmd-desafio-angular.netlify.app
