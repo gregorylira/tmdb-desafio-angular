@@ -46,3 +46,12 @@
     }
   }
 }
+
+@media (max-width: 1080px) {
+  .sistemaButoes {
+    button {
+      padding: 0 0.25rem;
+      height: 25px;
+    }
+  }
+}

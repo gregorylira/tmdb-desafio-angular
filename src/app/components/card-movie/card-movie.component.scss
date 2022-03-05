@@ -18,3 +18,10 @@
     transform: scale(1.05);
   }
 }
+
+@media (max-width: 1080px) {
+  .card-movie {
+    width: 9rem;
+    height: 13rem;
+  }
+}

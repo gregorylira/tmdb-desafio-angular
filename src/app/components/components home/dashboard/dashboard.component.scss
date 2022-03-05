@@ -9,6 +9,7 @@
   gap: 1rem;
   background: var(--purple);
   color: var(--shape);
+
   h1 {
     font-weight: bold;
     font-size: 3rem;
@@ -45,5 +46,19 @@
   button.ativo {
     background: var(--orange);
     color: var(--shape);
+  }
+}
+@media (max-width: 1080px) {
+  .dashboard {
+    height: 50rem;
+
+    h1 {
+      font-size: 1.7rem;
+    }
+    div {
+      button {
+        padding: 0.25rem 0.5rem;
+      }
+    }
   }
 }
