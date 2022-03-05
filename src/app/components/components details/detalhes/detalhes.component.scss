@@ -116,3 +116,49 @@
     overflow-y: hidden;
   }
 }
+
+@media (max-width: 1080px) {
+  .detalhes {
+    height: 110rem;
+    align-items: flex-start;
+    aside {
+      flex-direction: column;
+      width: 90%;
+      margin: 50px;
+
+      .logoimagem {
+        height: 500px;
+        width: 300px;
+      }
+
+      h3 + span {
+        width: 100%;
+      }
+
+      .participantes {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+  .elenco {
+    margin: 0;
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .trailer {
+    margin: 0;
+    margin-top: 1rem;
+    width: 100%;
+    .trailer-video {
+      iframe {
+        width: 100%;
+      }
+    }
+  }
+  .recomendacoes {
+    margin: 0;
+    margin-top: 1rem;
+    width: 100%;
+  }
+}
