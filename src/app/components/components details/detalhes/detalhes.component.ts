@@ -48,6 +48,7 @@ export class DetalhesComponent implements OnInit {
     this.getFiveProducao();
     this.getTrailer();
     this.getRecomendacoes();
+    this.idademinima = this.tmdApiService.getIdadeMinima(this.id);
   }
 
   getParticipantes() {

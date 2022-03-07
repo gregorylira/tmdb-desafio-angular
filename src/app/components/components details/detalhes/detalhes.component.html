@@ -8,8 +8,8 @@
     <div class="detalhesTotal">
       <h2>{{ detail$.original_title }}</h2>
       <span
-        >16 anos • {{ detail$.release_date }} (BR) • {{ getGenres() }} •
-        {{ detail$.runtime }} minutos</span
+        >{{ this.idademinima | async }} anos • {{ detail$.release_date }} (BR) •
+        {{ getGenres() }} • {{ detail$.runtime }} minutos</span
       >
       <div class="avaliacao">
         <img src="../../../../assets/avaliacao.svg" alt="avaliacao" />
