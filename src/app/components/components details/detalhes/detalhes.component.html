@@ -12,7 +12,16 @@
         {{ getGenres() }} • {{ detail$.runtime }} minutos</span
       >
       <div class="avaliacao">
-        <img src="../../../../assets/avaliacao.svg" alt="avaliacao" />
+        <circle-progress
+          [percent]="detail$.vote_average * 10"
+          [radius]="50"
+          [outerStrokeWidth]="8"
+          [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#78C000'"
+          [innerStrokeColor]="'#C7E596'"
+          [animation]="true"
+          [animationDuration]="300"
+        ></circle-progress>
         <span>Avaliação dos usuários</span>
       </div>
       <h3>Sinopse</h3>

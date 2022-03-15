@@ -14,6 +14,7 @@ import { DetailsPageComponent } from './pages/details-page/details-page.componen
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SafePipe } from './pipe/safe';
 import { RouterModule } from '@angular/router';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,21 @@ import { RouterModule } from '@angular/router';
     DetailsPageComponent,
     SafePipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, RouterModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    RouterModule,
+    NgCircleProgressModule.forRoot({
+      // define os padrões aqui
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: '#78C000',
+      innerStrokeColor: '#C7E596',
+      animationDuration: 300,
+    }),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
